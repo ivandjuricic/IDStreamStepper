@@ -9,6 +9,7 @@ public:
     ~Motor();
     void Forwards(int steps);
     void Backwards(int steps);
+    void cancel();
 
 private:
     //virtual int readSteps();

@@ -1,2 +1,3 @@
+*.cpp.autosave
 *.pro.user
 wiringPi.h

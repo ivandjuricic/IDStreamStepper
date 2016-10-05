@@ -18,7 +18,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
             motor.h \
-            #wiringPi.h
+            wiringPi.h
 
 FORMS    += mainwindow.ui \
 

@@ -25,6 +25,7 @@ void MainWindow::on_applyButton_clicked()
 
 void MainWindow::on_cancelButton_clicked()
 {
+    motor->cancel();
     delete motor;
     this->close();
 }

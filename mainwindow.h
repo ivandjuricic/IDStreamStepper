@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    Motor *motor;
+    Motor *motor = new Motor;
 
 private slots:
     void on_applyButton_clicked();

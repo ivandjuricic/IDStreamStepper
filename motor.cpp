@@ -9,7 +9,7 @@
 int readSteps(){
     std::ifstream myfile;
     std::string line;
-    myfile.open ("/home/ivan/Desktop/a.txt");
+    myfile.open("/home/ivan/Desktop/a.txt"); //place file wherever
     if (myfile.is_open())
     {
         getline(myfile, line);
@@ -17,6 +17,15 @@ int readSteps(){
     }
     return atoi(line.c_str());
 }
+
+void writeNewSteps(int steps){
+    int oldSteps = readSteps();
+    std::ofstream myfile;
+    myfile.open("/home/ivan/Desktop/a.txt"); //again, place wherever
+    myfile << oldSteps + steps;
+    myfile.close();
+}
+
 
 Motor::Motor(){
     microseconds = 100;
@@ -56,6 +65,7 @@ void Motor::Forwards(int steps=0){
     }
     digitalWrite(directionPin, LOW);
     digitalWrite(enablePin, LOW);
+    writeNewSteps(-steps);
 }
 
 
@@ -75,4 +85,20 @@ void Motor::Backwards(int steps=0){
     }
     digitalWrite(directionPin, LOW);
     digitalWrite(enablePin, LOW);
+    writeNewSteps(steps);
+}
+
+void Motor::cancel(){
+    int currentSteps = readSteps();
+     qDebug() << currentSteps << defaultSteps << endl;
+    int stepDifference = defaultSteps - currentSteps;
+    if(currentSteps < defaultSteps)
+        this->Backwards(abs(stepDifference));
+    else if(currentSteps > defaultSteps)
+        this->Forwards(abs(stepDifference));
+    else
+    {
+        qDebug() << "Prodje" << endl;
+        return;
+    }
 }
